@@ -10,3 +10,7 @@ http://ogldev.atspace.co.uk
 
 // the below link has some puzzle building code:
 https://github.com/twyatt/klotski-solver
+
+//Kelvin Lok:
+
+https://learnopengl.com/code_viewer_gh.php?code=src/1.getting_started/2.3.hello_triangle_exercise1/hello_triangle_exercise1.cpp
