@@ -17,4 +17,7 @@ https://github.com/twyatt/klotski-solver
 
 //Kelvin Lok:
 
-https://learnopengl.com/code_viewer_gh.php?code=src/1.getting_started/2.3.hello_triangle_exercise1/hello_triangle_exercise1.cpp
+https://learnopengl.com/Getting-started/Hello-Triangle
+
+  //Rectangle:  https://learnopengl.com/code_viewer_gh.php?code=src/1.getting_started/2.2.hello_triangle_indexed/hello_triangle_indexed.cpp
+  //Triangle:   https://learnopengl.com/code_viewer_gh.php?code=src/1.getting_started/2.1.hello_triangle/hello_triangle.cpp
