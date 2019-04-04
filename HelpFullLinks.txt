@@ -8,6 +8,8 @@ http://ogldev.atspace.co.uk
 
 https://github.com/Ryc1x/CS3733-KlotskiApp
 
+https://stackoverflow.com/questions/38163188/openglc-draw-square
+
 //Cristian Cortez:
 
 // the below link has some puzzle building code:
