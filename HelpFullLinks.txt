@@ -19,6 +19,8 @@ https://open.gl/
 // the below link has some puzzle building code:
 https://github.com/twyatt/klotski-solver
 
+https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
+
 //Kelvin Lok:
 
 https://learnopengl.com/Getting-started/Hello-Triangle
