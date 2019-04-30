@@ -20,6 +20,8 @@ LOOK HERE:: https://github.com/Q2499279972/Klotski
 
 https://community.khronos.org/t/drawing-a-2d-quad-in-opengl-2-1-3/61552
 
+https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glRect.xml
+
 //Cristian Cortez:
 
 // the below link has some puzzle building code:
