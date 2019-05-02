@@ -1,195 +1,347 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include"lib.h"
+#include"shader.h"
 
 #include <iostream>
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow *window);
+Vertex vertices[] = {
+	//Position                            //Color                            //Texcoords
 
-// settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+	//Base
+	//glm::vec3(-0.5f, 0.8f, 0.f),          glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 1.f),     //Top left
+	//glm::vec3(-0.5f, -0.8f, 0.f),         glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 0.f),     //Bottom left
+	//glm::vec3(0.5f, -0.8f, 0.f),          glm::vec3(1.f, 1.f, 1.f),          glm::vec2(1.f, 0.f),     //Bottom right
+	//glm::vec3(0.5f, 0.8f, 0.f),           glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 0.f),     //Top right
 
-const char *vertexShaderSource = "#version 330 core\n"
-"layout (location = 0) in vec3 aPos;\n"
-"void main()\n"
-"{\n"
-"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-"}\0";
-const char *fragmentShaderSource = "#version 330 core\n"
-"out vec4 FragColor;\n"
-"void main()\n"
-"{\n"
-"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-"}\n\0";
+	//Block 1
+	glm::vec3(-0.5f, 0.8f, 0.f),          glm::vec3(0.f, 0.f, 1.f),          glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(-0.5f, 0.16f, 0.f),         glm::vec3(0.f, 0.f, 1.f),          glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(-0.25f, 0.16f, 0.f),        glm::vec3(0.f, 0.f, 1.f),          glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(-0.25f, 0.8f, 0.f),         glm::vec3(0.f, 0.f, 1.f),          glm::vec2(0.f, 0.f),     //Top right
 
-int main()
-{
-	// glfw: initialize and configure
-	// ------------------------------
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	//Block 2
+	glm::vec3(-0.25f, 0.8f, 0.f),         glm::vec3(1.f, 0.f, 0.f),          glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(-0.25f, 0.16f, 0.f),        glm::vec3(1.f, 0.f, 0.f),          glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(0.25f, 0.16f, 0.f),         glm::vec3(1.f, 0.f, 0.f),          glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(0.25f, 0.8f, 0.f),          glm::vec3(1.f, 0.f, 0.f),          glm::vec2(0.f, 0.f),     //Top right
 
-#ifdef __APPLE__
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
-#endif
+	//Block 3
+	glm::vec3(0.25f, 0.8f, 0.f),          glm::vec3(0.f, 1.f, 0.f),          glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(0.25f, 0.16f, 0.f),         glm::vec3(0.f, 1.f, 0.f),          glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(0.5f, 0.16f, 0.f),          glm::vec3(0.f, 1.f, 0.f),          glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(0.5f, 0.8f, 0.f),           glm::vec3(0.f, 1.f, 0.f),          glm::vec2(0.f, 0.f),     //Top right
 
-	// glfw window creation
-	// --------------------
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
-	if (window == NULL)
-	{
-		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
-		return -1;
+	//Block 4
+	glm::vec3(-0.5f, 0.16f, 0.f),         glm::vec3(1.f, 1.f, 0.f),          glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(-0.5f, -0.48f, 0.f),        glm::vec3(1.f, 1.f, 0.f),          glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(-0.25f, -0.48f, 0.f),       glm::vec3(1.f, 1.f, 0.f),          glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(-0.25f, 0.16f, 0.f),        glm::vec3(1.f, 1.f, 0.f),          glm::vec2(0.f, 0.f),     //Top right
+
+	//Block 5
+	glm::vec3(-0.25f, 0.16f, 0.f),        glm::vec3(1.f, 0.f, 1.f),          glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(-0.25f, -0.16f, 0.f),       glm::vec3(1.f, 0.f, 1.f),          glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(0.25f, -0.16f, 0.f),        glm::vec3(1.f, 0.f, 1.f),          glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(0.25f, 0.16f, 0.f),         glm::vec3(1.f, 0.f, 1.f),          glm::vec2(0.f, 0.f),     //Top right
+
+	//Block 6
+	glm::vec3(-0.25f, -0.16f, 0.f),       glm::vec3(0.5f, 0.f, 0.f),         glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(-0.25f, -0.48f, 0.f),       glm::vec3(0.5f, 0.f, 0.f),         glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(0.0f, -0.48f, 0.f),         glm::vec3(0.5f, 0.f, 0.f),         glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(0.0f, -0.16f, 0.f),         glm::vec3(0.5f, 0.f, 0.f),         glm::vec2(0.f, 0.f),     //Top right
+
+	//Block 7
+	glm::vec3(0.0f, -0.16f, 0.f),         glm::vec3(0.f, 1.f, 1.f),          glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(0.0f, -0.48f, 0.f),         glm::vec3(0.f, 1.f, 1.f),          glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(0.25f, -0.48f, 0.f),        glm::vec3(0.f, 1.f, 1.f),          glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(0.25f, -0.16f, 0.f),        glm::vec3(0.f, 1.f, 1.f),          glm::vec2(0.f, 0.f),     //Top right
+
+	//Block 8
+	glm::vec3(0.25f, 0.16f, 0.f),         glm::vec3(0.f, 0.f, 0.5f),         glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(0.25f, -0.48f, 0.f),        glm::vec3(0.f, 0.f, 0.5f),         glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(0.5f, -0.48f, 0.f),         glm::vec3(0.f, 0.f, 0.5f),         glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(0.5f, 0.16f, 0.f),          glm::vec3(0.f, 0.f, 0.5f),         glm::vec2(0.f, 0.f),     //Top right
+
+	//Block 9
+	glm::vec3(-0.5f, -0.48f, 0.f),        glm::vec3(0.f, 0.5f, 0.f),         glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(-0.5f, -0.8f, 0.f),         glm::vec3(0.f, 0.5f, 0.f),         glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(-0.25f, -0.8f, 0.f),        glm::vec3(0.f, 0.5f, 0.f),         glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(-0.25f, 0.48f, 0.f),        glm::vec3(0.f, 0.5f, 0.f),         glm::vec2(0.f, 0.f),     //Top right
+
+	//Block 10
+	glm::vec3(0.25f, -0.48f, 0.f),        glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(0.25f, -0.8f, 0.f),         glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(0.5f, -0.8f, 0.f),          glm::vec3(1.f, 1.f, 1.f),          glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(0.5f, -0.48f, 0.f),        glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 0.f)      //Top right
+};
+unsigned nrOfVertices = sizeof(vertices) / sizeof(Vertex);
+
+GLuint indices[] = {
+	//Block1
+	0, 1, 2,
+	0, 2, 3,
+
+	//Block 2
+	4, 5, 6,
+	4, 6, 7,
+
+	//Block 3
+	8, 9, 10,
+	8, 10, 11,
+
+	//Block 4
+	12, 13, 14,
+	12, 14, 15,
+
+	//Block 5
+	16, 17, 18,
+	16, 18, 19,
+
+	//Block 6
+	20, 21, 22,
+	20, 22, 23,
+
+	//Block 7
+	24, 25, 26,
+	24, 26, 27,
+
+	//Block 8
+	28, 29, 30,
+	28, 30, 31,
+
+	//Block 9
+	32, 33, 34,
+	32, 34, 35,
+
+	//Block 10
+	36, 37, 38,
+	36, 38, 39
+};
+unsigned nrOfIndices = sizeof(indices) / sizeof(GLuint);
+
+void updateInput(GLFWwindow* window) {
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
 	}
-	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+}
 
-	// glad: load all OpenGL function pointers
-	// ---------------------------------------
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		return -1;
-	}
+void framebuffer_resize_callback(GLFWwindow* window, int fbW, int fbH) {
+	glViewport(0, 0, fbW, fbH);
+}
 
+bool loadShaders(GLuint &program) {
 
-	// build and compile our shader program
-	// ------------------------------------
-	// vertex shader
-	int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
-	// check for shader compile errors
-	int success;
+	bool loadSuccess = true;
 	char infoLog[512];
+	GLint success;
+
+	std::string temp = "";
+	std::string src = "";
+
+	std::ifstream in_file;
+
+	//Vertex
+	in_file.open("vertex_core.glsl");
+
+	if (in_file.is_open()) {
+		while (std::getline(in_file, temp))
+			src += temp + "\n";
+	}
+	else {
+		std::cout << "ERROR:: LOADSHADERS::COULD_NOT_OPEN_VERTEX_FILE" << "\n";
+		loadSuccess = false;
+	}
+
+	in_file.close();
+
+	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	const GLchar* vertSrc = src.c_str();
+	glShaderSource(vertexShader, 1, &vertSrc, NULL);
+	glCompileShader(vertexShader);
+
 	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-	// fragment shader
-	int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
-	// check for shader compile errors
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-	// link shaders
-	int shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	// check for linking errors
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
 	if (!success) {
-		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+		std::cout << "ERROR:: LOADSHADERS::COULD_NOT_VERTEX_SHADER" << "\n";
+		std::cout << infoLog << "\n";
+		loadSuccess = false;
 	}
+
+	temp = "";
+	src = "";
+
+	//Fragment
+	in_file.open("fragment_core.glsl");
+
+	if (in_file.is_open()) {
+		while (std::getline(in_file, temp))
+			src += temp + "\n";
+	}
+	else {
+		std::cout << "ERROR:: LOADSHADERS::COULD_NOT_OPEN_FRAGMENT_FILE" << "\n";
+		loadSuccess = false;
+	}
+
+	in_file.close();
+
+	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	const GLchar* fragSrc = src.c_str();
+	glShaderSource(fragmentShader, 1, &fragSrc, NULL);
+	glCompileShader(fragmentShader);
+
+	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+	if (!success) {
+		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+		std::cout << "ERROR:: LOADSHADERS::COULD_NOT_FRAGMENT_SHADER" << "\n";
+		std::cout << infoLog << "\n";
+		loadSuccess = false;
+	}
+
+	//Program
+	program = glCreateProgram();
+	glAttachShader(program, vertexShader);
+	glAttachShader(program, fragmentShader);
+
+	glLinkProgram(program);
+
+	glGetProgramiv(program, GL_LINK_STATUS, &success);
+	if (!success) {
+		glGetProgramInfoLog(program, 512, NULL, infoLog);
+		std::cout << "ERROR:: LOADSHADERS::COULD_NOT_LINK_PROGRAM" << "\n";
+		std::cout << infoLog << "\n";
+		loadSuccess = false;
+	}
+
+
+	//END
+	glUseProgram(0);
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
-	// set up vertex data (and buffer(s)) and configure vertex attributes
-	// ------------------------------------------------------------------
-	float vertices[] = {
-		 0.5f,  0.5f, 0.0f,  // top right
-		 0.5f, -0.5f, 0.0f,  // bottom right
-		-0.5f, -0.5f, 0.0f,  // bottom left
-		-0.5f,  0.5f, 0.0f   // top left 
-	};
-	unsigned int indices[] = {  // note that we start from 0!
-		0, 1, 3,  // first Triangle
-		1, 2, 3   // second Triangle
-	};
-	unsigned int VBO, VAO, EBO;
+	return loadSuccess;
+}
+
+int main() {
+
+	//INIT GLFW
+	glfwInit();
+
+	//CREATE WINDOW
+	const int WINDOW_WIDTH = 640;
+	const int WINDOW_HEIGHT = 480;
+	int framebufferWidth = 0;
+	int framebufferHeight = 0;
+
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
+
+	GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "KLOTSKI", NULL, NULL);
+
+	glfwSetFramebufferSizeCallback(window, framebuffer_resize_callback);
+
+	glfwMakeContextCurrent(window);
+
+
+
+	//INIT GLEW (NEEDS WINDOW AND OPENGL CONTEXT)
+	glewExperimental = GL_TRUE;
+
+
+	//ERROR
+	if (glewInit() != GLEW_OK) {
+		std::cout << "ERROR::MAIN.CPP::GLEW_INIT_FAILED" << "\n";
+		glfwTerminate;
+	}
+
+
+	//OPENGL OPTIONS
+	glEnable(GL_DEPTH_TEST);
+
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glFrontFace(GL_CCW);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	//SHADER INIT
+	GLuint core_program;
+	if (!loadShaders(core_program))
+		glfwTerminate();
+
+
+	//VAO, VBO, EBO
+	//GEN VAO AND BIND
+	GLuint VAO;    // Vertex Array Object
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 	glBindVertexArray(VAO);
 
+
+	//Gen VAO AND BIND
+	GLuint VBO;
+	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+
+	//GEN EBO AND BIND AND SEND DATA
+	GLuint EBO;
+	glGenBuffers(1, &EBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	//SET VERTEXATTRIBPOINTERS AND ENABLE (INPUT ASSEMBLY)
+	//Position
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
 	glEnableVertexAttribArray(0);
+	//Color
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, color));
+	glEnableVertexAttribArray(1);
+	//Texcoord
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, texcoord));
+	glEnableVertexAttribArray(2);
 
-	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	// remember: do NOT unbind the EBO while a VAO is active as the bound element buffer object IS stored in the VAO; keep the EBO bound.
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+	//BIND VAO 0
 	glBindVertexArray(0);
 
 
-	// uncomment this call to draw in wireframe polygons.
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-	// render loop
-	// -----------
-	while (!glfwWindowShouldClose(window))
-	{
-		// input
-		// -----
-		processInput(window);
-
-		// render
-		// ------
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		// draw our first triangle
-		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-		//glDrawArrays(GL_TRIANGLES, 0, 6);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		// glBindVertexArray(0); // no need to unbind it every time 
-
-		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-		// -------------------------------------------------------------------------------
-		glfwSwapBuffers(window);
+	//MAIN LOOP
+	while (!glfwWindowShouldClose(window)) {
+		//UPDATE INPUT ---
 		glfwPollEvents();
+
+
+		//UPDATE ---
+		updateInput(window);
+
+		//CLEAR
+		glClearColor(0.f, 0.f, 0.f, 1.f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+		//Use a program
+		glUseProgram(core_program);
+
+		//Bind vertex array object (VAO)
+		glBindVertexArray(VAO);
+
+		//Draw
+		glDrawElements(GL_TRIANGLES, nrOfIndices, GL_UNSIGNED_INT, 0);
+
+
+		//END DRAW
+		glfwSwapBuffers(window);
+		glFlush();
 	}
 
-	// optional: de-allocate all resources once they've outlived their purpose:
-	// ------------------------------------------------------------------------
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
-
-	// glfw: terminate, clearing all previously allocated GLFW resources.
-	// ------------------------------------------------------------------
+	//END OF PROGRAM
+	glfwDestroyWindow(window);
 	glfwTerminate();
+
+
+	//DELETE PROGRAM
+	glDeleteProgram(core_program);
 	return 0;
-}
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow *window)
-{
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
-}
-
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	// make sure the viewport matches the new window dimensions; note that width and 
-	// height will be significantly larger than specified on retina displays.
-	glViewport(0, 0, width, height);
 }
