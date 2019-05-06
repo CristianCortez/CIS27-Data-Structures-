@@ -30,6 +30,10 @@ https://www.lighthouse3d.com/tutorials/opengl-selection-tutorial/
 
 https://stackoverflow.com/questions/5717654/glulookat-explanation
 
+https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/gluLookAt.xml
+
+https://stackoverflow.com/questions/3126877/opengl-newbie-best-way-to-move-objects-about-in-a-scene
+
 //Cristian Cortez:
 
 // the below link has some puzzle building code:
