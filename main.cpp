@@ -6,6 +6,17 @@
 Vertex vertices[] = {
 	//Position                            //Color                            //Texcoords
 
+	//Base
+	glm::vec3(-0.5f, 0.8f, 0.8f),          glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(-0.5f, -0.8f, 0.8f),         glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(0.5f, -0.8f, 0.8f),          glm::vec3(1.f, 1.f, 1.f),          glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(0.5f, 0.8f, 0.8f),           glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 0.f),     //Top right
+
+	glm::vec3(-0.6f, 0.9f, 0.8f),          glm::vec3(0.5f, 1.f, 0.5f),          glm::vec2(0.f, 1.f),     //Top left
+	glm::vec3(-0.6f, -0.9f, 0.8f),         glm::vec3(0.5f, 1.f, 0.5f),          glm::vec2(0.f, 0.f),     //Bottom left
+	glm::vec3(0.6f, -0.9f, 0.8f),          glm::vec3(0.5f, 1.f, 0.5f),          glm::vec2(1.f, 0.f),     //Bottom right
+	glm::vec3(0.6f, 0.9f, 0.8f),           glm::vec3(0.5f, 1.f, 0.5f),          glm::vec2(0.f, 0.f),     //Top right
+
 	//Block 1
 	glm::vec3(-0.5f, 0.8f, 0.f),          glm::vec3(1.f, 1.f, 0.f),          glm::vec2(1.f, 1.f),     //Top left
 	glm::vec3(-0.5f, 0.16f, 0.f),         glm::vec3(1.f, 1.f, 0.f),          glm::vec2(0.f, 0.f),     //Bottom left
@@ -66,12 +77,6 @@ Vertex vertices[] = {
 	glm::vec3(0.5f, -0.8f, 0.f),          glm::vec3(0.f, 0.f, 0.f),          glm::vec2(1.f, 0.f),     //Bottom right
 	glm::vec3(0.5f, -0.48f, 0.f),        glm::vec3(1.f, 1.f, 0.f),          glm::vec2(0.f, 0.f),      //Top right
 
-	//Base
-	glm::vec3(-0.6f, 0.9f, 0.9f),          glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 1.f),     //Top left
-	glm::vec3(-0.6f, -0.9f, 0.9f),         glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 0.f),     //Bottom left
-	glm::vec3(0.6f, -0.9f, 0.9f),          glm::vec3(1.f, 1.f, 1.f),          glm::vec2(1.f, 0.f),     //Bottom right
-	glm::vec3(0.6f, 0.9f, 0.9f),           glm::vec3(1.f, 1.f, 1.f),          glm::vec2(0.f, 0.f),    //Top right
-
 	//Exit
 	glm::vec3(-0.25f, -0.8f, 0.f),        glm::vec3(0.f, 0.f, 1.f),         glm::vec2(0.f, 0.f),    //Top left
 	glm::vec3(-0.25f, -0.9f, 0.f),        glm::vec3(0.f, 0.f, 1.f),         glm::vec2(1.f, 0.f),     //Bottom left
@@ -121,13 +126,16 @@ GLuint indices[] = {
 	36, 37, 38,
 	36, 38, 39,
 
-	//Base
+	//Base:
 	40, 41, 42,
 	40, 42, 43,
 
-	//Exit
+	//base 3:
 	44, 45, 46,
-	44, 46, 47
+	44, 46, 47,
+
+	48, 49, 50,
+	48, 50, 51
 };
 unsigned nrOfIndices = sizeof(indices) / sizeof(GLuint);
 
