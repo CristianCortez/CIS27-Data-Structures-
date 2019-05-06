@@ -28,6 +28,8 @@ https://stackoverflow.com/questions/15164295/opengl-how-to-use-mouse-picking-squ
 
 https://www.lighthouse3d.com/tutorials/opengl-selection-tutorial/
 
+https://stackoverflow.com/questions/5717654/glulookat-explanation
+
 //Cristian Cortez:
 
 // the below link has some puzzle building code:
