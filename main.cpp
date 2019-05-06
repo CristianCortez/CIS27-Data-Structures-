@@ -1,7 +1,11 @@
 #include"lib.h"
-#include"shader.h"
-
+#include <GL/glew.h> // include GLEW and new version of GL on Windows
+#include <GLFW/glfw3.h> // GLFW helper library
+#include <stdio.h>
 #include <iostream>
+
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
 
 Vertex vertices[] = {
 	//Position                            //Color                            //Texcoords
@@ -247,17 +251,20 @@ int main() {
 	glfwInit();
 
 	//CREATE WINDOW
-	const int WINDOW_WIDTH = 640;
-	const int WINDOW_HEIGHT = 480;
+
 	int framebufferWidth = 0;
 	int framebufferHeight = 0;
+
+        /*
 
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-	GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "KLOTSKI", NULL, NULL);
+        */
+
+	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "KLOTSKI", NULL, NULL);
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_resize_callback);
 
@@ -331,6 +338,15 @@ int main() {
 
 	//MAIN LOOP
 	while (!glfwWindowShouldClose(window)) {
+
+                glViewport(0.0f, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, 0, 1);
+		glMatrixMode(GL_MODELVIEW);  //resets matrix mdoe back to default
+		glLoadIdentity();
+
+
 		//UPDATE INPUT ---
 		glfwPollEvents();
 
