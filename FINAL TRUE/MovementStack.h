@@ -1,3 +1,7 @@
+/*
+Cristian Cortez
+*/
+
 #ifndef MOVEMENTSTACK_H
 #define MOVEMENTSTACK_H
 #pragma once
