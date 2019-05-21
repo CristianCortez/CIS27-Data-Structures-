@@ -1,3 +1,7 @@
+/*
+Cristian C
+*/
+
 #include "Vertex.h"
 
 using namespace std;
