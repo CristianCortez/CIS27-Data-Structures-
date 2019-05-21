@@ -123,7 +123,7 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
-
+	/*
 	if (key == GLFW_KEY_R && action == GLFW_PRESS) {
 
 		keyPressReset == GLFW_PRESS;
@@ -145,7 +145,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 	}
 
-
+	*/
 
 }
 
@@ -276,7 +276,7 @@ int main() {
 
 		// MOUSE START
 
-		glfwSetCursorPosCallback(window, cursor_position_callback);
+		//glfwSetCursorPosCallback(window, cursor_position_callback);
 
 
 
@@ -515,10 +515,40 @@ int main() {
 
 			for (int i = 8; i < 48; i++) {
 
-				cout << "   X:  " << vertices[i].position[0] << "   Y:   " << vertices[i].position[1] << endl
+				cout << "   X:  " << vertices[i].position[0] << "   Y:   " << vertices[i].position[1] << endl;
 
 
 			}
+
+			// Vertex Array Object
+			glGenVertexArrays(1, &VAO);
+			glBindVertexArray(VAO);
+
+
+			//Gen VAO AND BIND
+			glGenBuffers(1, &VBO);
+			glBindBuffer(GL_ARRAY_BUFFER, VBO);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+
+			//GEN EBO AND BIND AND SEND DATA
+			glGenBuffers(1, &EBO);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+			//SET VERTEXATTRIBPOINTERS AND ENABLE (INPUT ASSEMBLY)
+			//Position
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, position));
+			glEnableVertexAttribArray(0);
+			//Color
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, color));
+			glEnableVertexAttribArray(1);
+			//Texcoord
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, texcoord));
+			glEnableVertexAttribArray(2);
+
+			//BIND VAO 0
+			glBindVertexArray(0);
 
 
 		}
