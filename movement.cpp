@@ -377,6 +377,9 @@ void redraw(GLFWwindow* window, GLuint VAO, GLuint VBO, GLuint EBO, GLuint indic
 	//BIND VAO 0
 	glBindVertexArray(0);
 
+	glfwSwapBuffers(window);
+	glFlush();
+
 }
 
 int getDirection(double xposEnd, double yposEnd, int index, Vertex vertices[]) {
