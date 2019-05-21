@@ -1,4 +1,4 @@
-#include"lib.h"
+#include"Vertex.h"
 #include <GL/glew.h> // include GLEW and new version of GL on Windows
 #include <GLFW/glfw3.h> // GLFW helper library
 #include <stdio.h>
@@ -293,7 +293,7 @@ bool isSpaceEmpty(int direction, double xpos, double ypos, int index, Vertex ver
 
 			case 4:
 
-				isThereABlock = selectBlock(vertices[index + 1].position[0] + 0.05, vertices[index].position[1] - 0.05, vertices);
+				isThereABlock = selectBlock(vertices[index + 1].position[0] + 0.05, vertices[index + 1].position[1] - 0.05, vertices);
 				isThereABlock2 = selectBlock(vertices[index + 2].position[0] - 0.05, vertices[index + 2].position[1] - 0.05, vertices);
 
 
@@ -347,7 +347,7 @@ bool isSpaceEmpty(int direction, double xpos, double ypos, int index, Vertex ver
 
 }
 
-void redraw(GLuint VAO, GLuint VBO, GLuint EBO, GLuint indices[], Vertex vertices[]) {
+void redraw(GLFWwindow* window, GLuint VAO, GLuint VBO, GLuint EBO, GLuint indices[], Vertex vertices[]) {
 
     // Vertex Array Object
 	glGenVertexArrays(1, &VAO);
