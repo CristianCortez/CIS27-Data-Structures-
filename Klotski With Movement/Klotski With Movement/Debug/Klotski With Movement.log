@@ -1,0 +1,44 @@
+﻿  movement.cpp
+c:\users\boneless\desktop\klotski with movement\klotski with movement\movement.cpp(32): warning C4305: '+=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\boneless\desktop\klotski with movement\klotski with movement\movement.cpp(33): warning C4305: '+=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\boneless\desktop\klotski with movement\klotski with movement\movement.cpp(34): warning C4305: '+=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\boneless\desktop\klotski with movement\klotski with movement\movement.cpp(35): warning C4305: '+=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\boneless\desktop\klotski with movement\klotski with movement\movement.cpp(41): warning C4305: '-=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\boneless\desktop\klotski with movement\klotski with movement\movement.cpp(42): warning C4305: '-=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\boneless\desktop\klotski with movement\klotski with movement\movement.cpp(43): warning C4305: '-=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\boneless\desktop\klotski with movement\klotski with movement\movement.cpp(44): warning C4305: '-=': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\boneless\desktop\klotski with movement\klotski with movement\movement.cpp(71): warning C4101: 'possibleXpos': unreferenced local variable
+c:\users\boneless\desktop\klotski with movement\klotski with movement\movement.cpp(72): warning C4101: 'possibleYpos': unreferenced local variable
+  Klotski With Movement.vcxproj -> C:\Users\BoneLess\Desktop\Klotski With Movement\Debug\Klotski With Movement.exe
