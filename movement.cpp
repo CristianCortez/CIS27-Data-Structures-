@@ -70,6 +70,8 @@ bool isSpaceEmpty(int direction, double xpos, double ypos, int index, Vertex ver
 	double distanceBetweenStartAndEndY;
 	double possibleXpos;
 	double possibleYpos;
+	int isThereABlock;
+	int isThereABlock2;
 
 	if (xpos > 0.5f || xpos < -0.5f || ypos > 0.8f || ypos < -0.8f) {
 
@@ -171,15 +173,19 @@ bool isSpaceEmpty(int direction, double xpos, double ypos, int index, Vertex ver
 			switch (direction) {
 
 			case 1:
-				
 
-				if (selectBlock(vertices[index + 1].position[0] - 0.05, vertices[index + 1].position[1] + 0.05, vertices) != -1) {
+				isThereABlock = selectBlock(vertices[index + 1].position[0] - 0.05, vertices[index + 1].position[1] + 0.05, vertices);
+				isThereABlock2 = selectBlock(vertices[index].position[0] - 0.05, vertices[index].position[1] - 0.05, vertices);
+
+				if (isThereABlock != -1) {
 
 					isEmpty = false;
 
 				}
 
-				else if (selectBlock(vertices[index].position[0] - 0.05, vertices[index].position[1] - 0.05, vertices) != -1) {
+				
+
+				else if (isThereABlock2 != -1) {
 
 					isEmpty = false;
 
@@ -205,15 +211,17 @@ bool isSpaceEmpty(int direction, double xpos, double ypos, int index, Vertex ver
 
 			case 2:
 
+				isThereABlock = selectBlock(vertices[index + 2].position[0] + 0.05, vertices[index + 2].position[1] + 0.05, vertices);
 
+				isThereABlock2 = selectBlock(vertices[index + 3].position[0] + 0.05, vertices[index + 3].position[1] - 0.05, vertices);
 
-				if (selectBlock(vertices[index + 2].position[0] + 0.05, vertices[index + 2].position[1] + 0.05, vertices) != -1) {
+				if (isThereABlock != -1) {
 
 					isEmpty = false;
 
 				}
 
-				else if (selectBlock(vertices[index + 3].position[0] + 0.05, vertices[index + 3].position[1] - 0.05, vertices) != -1) {
+				else if (isThereABlock2 != -1) {
 
 					isEmpty = false;
 
@@ -248,16 +256,22 @@ bool isSpaceEmpty(int direction, double xpos, double ypos, int index, Vertex ver
 
 			case 3:
 
+				isThereABlock = selectBlock(vertices[index].position[0] + 0.05, vertices[index].position[1] + 0.05, vertices);
+				isThereABlock2 = selectBlock(vertices[index + 3].position[0] - 0.05, vertices[index + 3].position[1] + 0.05, vertices);
 
-				if (selectBlock(vertices[index].position[0] + 0.05, vertices[index].position[1] + 0.05, vertices) != -1) {
+				if (isThereABlock != -1) {
 
 					isEmpty = false;
+
+					cout << " BLOCK IN THE WAY AT INDEX : " << isThereABlock;
 
 				}
 
-				else if (selectBlock(vertices[index + 3].position[0] - 0.05, vertices[index + 3].position[1] + 0.05, vertices) != -1) {
+				else if (isThereABlock2 != -1) {
 
 					isEmpty = false;
+
+					cout << " BLOCK IN THE WAY AT INDEX : " << isThereABlock2;
 
 				}
 
@@ -279,16 +293,23 @@ bool isSpaceEmpty(int direction, double xpos, double ypos, int index, Vertex ver
 
 			case 4:
 
+				isThereABlock = selectBlock(vertices[index + 1].position[0] + 0.05, vertices[index].position[1] - 0.05, vertices);
+				isThereABlock2 = selectBlock(vertices[index + 2].position[0] - 0.05, vertices[index + 2].position[1] - 0.05, vertices);
 
-				if (selectBlock(vertices[index + 1].position[0] + 0.05, vertices[index].position[1] - 0.05, vertices) != -1) {
+
+				if (isThereABlock != -1) {
 
 					isEmpty = false;
+
+					cout << " BLOCK IN THE WAY AT INDEX : " << isThereABlock;
 
 				}
 
-				else if (selectBlock(vertices[index + 2].position[0] - 0.05, vertices[index + 2].position[1] - 0.05, vertices) != -1) {
+				else if (isThereABlock2 != -1) {
 
 					isEmpty = false;
+
+					cout << " BLOCK IN THE WAY AT INDEX : " << isThereABlock2;
 
 				}
 
