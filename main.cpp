@@ -491,11 +491,6 @@ int main() {
 
 		winFlag = winCondition(vertices); //DO SOMETHING WITH THIS
 
-
-
-
-
-
 		glfwSetKeyCallback(window, key_callback);
 
 
@@ -508,10 +503,23 @@ int main() {
 
 
 
+
+
+
+
+
 		if (keyPressReset == GLFW_PRESS && oldkeyPressReset == GLFW_RELEASE) {
 
 			initVertexAry(vertices);
 			cout << "RESET";
+
+			for (int i = 8; i < 48; i++) {
+
+				cout << "   X:  " << vertices[i].position[0] << "   Y:   " << vertices[i].position[1] << endl
+
+
+			}
+
 
 		}
 
@@ -526,6 +534,17 @@ int main() {
 		oldkeyPressReset = keyPressReset;
 
 		oldkeyPressUndo = keyPressUndo;
+
+
+
+
+
+
+
+
+
+
+
 
 
         glViewport(0.0f, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT);
