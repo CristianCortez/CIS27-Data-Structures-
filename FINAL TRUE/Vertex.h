@@ -1,3 +1,7 @@
+/*
+ Kelvin and Cristian
+*/
+
 #ifndef VERTEX_H
 #define VERTEX_H
 #pragma once
