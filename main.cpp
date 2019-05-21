@@ -321,6 +321,8 @@ int main() {
 					//	vertices[indexOfFirstPositionVecOfSelectedBlock + 2], 
 					//	vertices[indexOfFirstPositionVecOfSelectedBlock + 3])
 
+					//BEGIN DRAW
+
 					// Vertex Array Object
 					glGenVertexArrays(1, &VAO);
 					glBindVertexArray(VAO);
@@ -349,6 +351,8 @@ int main() {
 
 					//BIND VAO 0
 					glBindVertexArray(0);
+
+					//BEGIN DRAW
 
 					break;
 
@@ -356,6 +360,8 @@ int main() {
 
 					moveRight(indexOfFirstPositionVecOfSelectedBlock, vertices);
 
+					//BEGIN DRAW
+
 					// Vertex Array Object
 					glGenVertexArrays(1, &VAO);
 					glBindVertexArray(VAO);
@@ -385,6 +391,8 @@ int main() {
 
 					//BIND VAO 0
 					glBindVertexArray(0);
+
+					//BEGIN END
 
 					break;
 
@@ -396,6 +404,8 @@ int main() {
 
 					cout << "   DID IT CHANGE :" << vertices[indexOfFirstPositionVecOfSelectedBlock].position[1];
 
+					//BEGIN DRAW
+
 					// Vertex Array Object
 					glGenVertexArrays(1, &VAO);
 					glBindVertexArray(VAO);
@@ -425,6 +435,8 @@ int main() {
 
 					//BIND VAO 0
 					glBindVertexArray(0);
+
+					//BEGIN END
 
 					break;
 
@@ -432,6 +444,8 @@ int main() {
 
 					moveDown(indexOfFirstPositionVecOfSelectedBlock, vertices);
 
+					//BEGIN DRAW
+
 					// Vertex Array Object
 					glGenVertexArrays(1, &VAO);
 					glBindVertexArray(VAO);
@@ -461,6 +475,8 @@ int main() {
 
 					//BIND VAO 0
 					glBindVertexArray(0);
+
+					//BEGIN END
 
 					break;
 
@@ -513,6 +529,8 @@ int main() {
 			initVertexAry(vertices);
 			cout << "RESET";
 
+			//BEGIN DRAW
+
 			// Vertex Array Object
 			glGenVertexArrays(1, &VAO);
 			glBindVertexArray(VAO);
@@ -543,6 +561,7 @@ int main() {
 			//BIND VAO 0
 			glBindVertexArray(0);
 
+			//BEGIN END
 
 		}
 
@@ -552,6 +571,8 @@ int main() {
 
 			cout << "BACKSPACE";
 
+			//BEGIN DRAW
+
 			// Vertex Array Object
 			glGenVertexArrays(1, &VAO);
 			glBindVertexArray(VAO);
@@ -581,6 +602,8 @@ int main() {
 
 			//BIND VAO 0
 			glBindVertexArray(0);
+
+			//END DRAW
 
 
 		}
