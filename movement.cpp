@@ -377,6 +377,21 @@ void redraw(GLFWwindow* window, GLuint VAO, GLuint VBO, GLuint EBO, GLuint indic
 	//BIND VAO 0
 	glBindVertexArray(0);
 
+
+	updateInput(window);
+
+	//CLEAR
+	glClearColor(0.f, 0.f, 0.f, 1.f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+	//Bind vertex array object (VAO)
+	glBindVertexArray(VAO);
+
+	//Draw
+	glDrawElements(GL_TRIANGLES, nrOfIndices, GL_UNSIGNED_INT, 0);
+
+
+	//END DRAW
 	glfwSwapBuffers(window);
 	glFlush();
 
