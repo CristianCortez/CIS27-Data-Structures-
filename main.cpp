@@ -121,31 +121,6 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 
 }
 
-void keyPressed(unsigned char key, int x, int y) {
-
-	
-
-	oldkeyPressReset = key;
-	oldkeyPressUndo = key;
-
-}
-
-void keyUp(unsigned char key, int x, int y) {
-
-	if (key == 'r') {
-
-		oldkeyPressReset = key
-
-	}
-
-	else if (key == 'backspace') {
-
-		oldkeyPressUndo = key;
-
-	}
-
-}
-
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
 
@@ -182,7 +157,7 @@ int main() {
 	unsigned nrOfVertices = sizeof(vertices) / sizeof(Vertex);
 
 	GLuint indices[78];
-	initIndicies(indicies);
+	initIndices(indices);
 	unsigned nrOfIndices = sizeof(indices) / sizeof(GLuint);
 
 	//MOUSE START
@@ -520,9 +495,18 @@ int main() {
 
 
 
+
 		glfwSetKeyCallback(window, key_callback);
 
-		
+
+		keyPressReset = glfwGetKey(window, GLFW_KEY_R);
+
+		keyPressUndo = glfwGetKey(window, GLFW_KEY_BACKSPACE);
+
+
+
+
+
 
 		if (keyPressReset == GLFW_PRESS && oldkeyPressReset == GLFW_RELEASE) {
 
